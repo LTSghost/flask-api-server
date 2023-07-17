@@ -7,7 +7,7 @@ python3 -m venv .venv
 pip3 install -r requirements.txt
 ```
 # app 資料夾 新增 .env 設定環境
-.env/
+nano app/.env
 ```
 MYSQL_USERNAME=root
 MYSQL_PASSWORD=password
