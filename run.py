@@ -16,7 +16,7 @@ print("run.py")
 def render_swagger_ui():
     return render_template('swagger-ui2.html', title='My API Documentation')
 
-# app.register_blueprint(basic_endpoints)
+app.register_blueprint(basic_endpoints)
 app.register_blueprint(sys_user)
 app.register_blueprint(system)
 

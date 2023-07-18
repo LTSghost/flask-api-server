@@ -17,5 +17,6 @@ def entity(entity_id):
         return {
             'message': 'This endpoint should create an entity',
             'method': request.method,
-            'body': request.json
+            'body': request.json,
+            'id': entity_id
         }
