@@ -5,9 +5,11 @@ from app.models.database import engine
 import json
 import pandas as pd
 
+print('sys_user')
+
 blueprint = Blueprint('user', __name__)
-api = Api(blueprint, version='1.0', title='Flask-API RESTful Service', description='sys_user API',
-          default_swagger_filename= 'system')
+api = Api(blueprint, version='1.0',doc='/user/', title='Flask-API RESTful Service', description='sys_user API',
+          default_swagger_filename= 'system',prefix='/user')
 # api2 = Api(blueprint, version='1.0', title='Flask-API RESTful Service', description='sys_user API',
 #           default_swagger_filename= 'system2')
 ns = api.namespace('sys_user', description='sys operations')
@@ -23,6 +25,12 @@ ns2 = api.namespace('sys_user2', description='sys operations')
 #         connection.close()
 
 #         return json.loads(df_json)
+
+@ns.route('/my-resource/<id>', endpoint='my-resource')
+@ns.doc(params={'id': 'An ID'})
+class MyResource(Resource):
+    def get(self, id):
+        return {"id": id}
 
 @ns.route('/getSysUser')
 class getSysUser(Resource):

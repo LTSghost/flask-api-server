@@ -1,11 +1,29 @@
 import os
 import sqlalchemy as db
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from dotenv import load_dotenv
 
+print('app')
+
 app = Flask(__name__)
+
+@app.route('/')
+@app.route('/home')
+def home():
+    return render_template('index.html')
+
+# --------------------------------------
+from flask_restx import Api, Resource
+api = Api(app, doc='/swagger-ui/', title='My swagger UI', prefix='/swagger-ui')
+
+@api.route('/top-bar')
+class TopBar(Resource):
+    def get(self):
+        # Handle GET request for the top bar
+        return {'message': 'This is the top bar'}
+#---------------------------------------
 
 load_dotenv()
 

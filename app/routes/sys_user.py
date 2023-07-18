@@ -1,10 +1,20 @@
 from flask import Blueprint
 from flask_restx import Api, Resource
+from app.services.sysUserService import sysUserService
 
-sys_user_route= Blueprint('sys_user', __name__)
+system = Blueprint('system', __name__)
+sys_api = Api(
+            system, version='1.0', 
+            doc='/system/',
+            title='System RESTful Service',
+            description='System API',
+            default_swagger_filename= 'system',
+            prefix='/system'
+        )
 
-api = Api(sys_user_route, version='1.0', title='Flask-API RESTful Service', description='sys_user API',
-          default_swagger_filename= 'system/sys_user')
+sys_ns = sys_api.namespace('sys_user', description='sys operations')
 
-ns = api.namespace('sys_user', description='sys operations')
-
+@sys_ns.route('/getSysUser')
+class getSysUser(Resource):
+    def get(self):
+        return sysUserService.getSysUser()
