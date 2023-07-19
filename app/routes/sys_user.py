@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_restx import Api, Resource
+# from app.routes.system.system import sys_api
 from app.services.sysUserService import sysUserService
 from app.services.sysMenuService import sysMenuService
 
@@ -25,3 +26,8 @@ class getSysUser(Resource):
 class getSysMenu(Resource):
     def get(self):
         return sysMenuService.getSysMenu()
+
+@sys_menu.route('/test')
+class getTest(Resource):
+    def get(self):
+        return {'message': 'test'}

@@ -1,9 +1,18 @@
 from flask import make_response, render_template
 from app.blueprints.sys_user import blueprint as sys_user
-from app.routes.sys_user import system
 from flask_cors import CORS
 from flask_restx import Resource
 from app import app, api
+# from app.routes.system import _straa
+
+# from app.routes.system import _system
+# from app.routes.system.system import system as system
+# from app.routes.sys_user import system
+
+from app.routes.system import system
+# from app.routes.system.system import system
+
+# print(_straa)
 
 @app.route('/swagger')
 def render_swagger_ui():
