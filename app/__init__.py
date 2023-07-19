@@ -1,9 +1,9 @@
-import os
+import config as _config
 import sqlalchemy as db
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from dotenv import load_dotenv
+
 
 print('app')
 
@@ -25,20 +25,12 @@ class TopBar(Resource):
         return {'message': 'This is the top bar'}
 #---------------------------------------
 
-load_dotenv()
 
-# 連線 MYSQL
-username = os.environ.get("MYSQL_USERNAME")  # 資料庫帳號
-password = os.environ.get("MYSQL_PASSWORD")  # 資料庫密碼
-host = os.environ.get("MYSQL_DB_ADDRESS")    # 資料庫位址
-port = os.environ.get("MYSQL_PORT")          # 資料庫埠號
-database = os.environ.get("MYSQL_DB")        # 資料庫名稱
-
-app.config['SQLALCHEMY_DATABASE_URI']=f'mysql+pymysql://{username}:{password}@{host}:{port}/{database}'
+app.config['SQLALCHEMY_DATABASE_URI']=f'mysql+pymysql://{_config.username}:{_config.password}@{_config.host}:{_config.port}/{_config.database}'
 
 # build engine from sqlalchemy
 engine = db.create_engine(
-    f'mysql+pymysql://{username}:{password}@{host}:{port}/{database}')
+    f'mysql+pymysql://{_config.username}:{_config.password}@{_config.host}:{_config.port}/{_config.database}')
 
 db = SQLAlchemy(app)
 

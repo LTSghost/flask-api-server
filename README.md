@@ -6,12 +6,12 @@ python3 -m venv .venv
 ```python
 pip3 install -r requirements.txt
 ```
-# app 資料夾 新增 .env 設定環境
-nano app/.env
+# 新增 .env 設定環境
+nano .env
 ```
 MYSQL_USERNAME=root
 MYSQL_PASSWORD=password
 MYSQL_DB_ADDRESS=localhost
 MYSQL_PORT=3306
-MYSQL_DB=table_name
+MYSQL_DB=db_name
 ```
