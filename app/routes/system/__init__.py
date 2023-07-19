@@ -29,6 +29,7 @@ sys_api = Api(
         )
 
 nr = sys_api.namespace('sys_role', description='sys operations')
+ns_user = sys_api.namespace('sys_user', description = 'sys_user operations')
 print('My_system done')
 
 # @sys_role.route('/role')
@@ -37,3 +38,4 @@ print('My_system done')
 #         return {'message': 'testRole'}
 
 from . import sys_role as _sys_role
+from . import sys_user as _sys_user
