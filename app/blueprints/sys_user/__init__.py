@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_restx import Api, Resource
 from sqlalchemy import text
-from app.models.database import engine
+from app import engine
 import json
 import pandas as pd
 
@@ -27,7 +27,8 @@ ns2 = api.namespace('sys_user2', description='sys operations')
 #         return json.loads(df_json)
 
 @ns.route('/my-resource/<id>', endpoint='my-resource')
-@ns.doc(params={'id': 'An ID'})
+@ns.doc(params={'id': 'An ID',
+                "name": 'howard'})
 class MyResource(Resource):
     def get(self, id):
         return {"id": id}

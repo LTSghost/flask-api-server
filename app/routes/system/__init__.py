@@ -1,6 +1,6 @@
 # import system as _system
 from flask import Blueprint
-from flask_restx import Api, Resource
+from flask_restx import Api, fields, Resource
 
 # print('sys_role before')
 # from . import sys_role as _sys_role
@@ -39,3 +39,4 @@ print('My_system done')
 
 from . import sys_role as _sys_role
 from . import sys_user as _sys_user
+from . import sys_menu as _sys_menu
