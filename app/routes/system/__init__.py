@@ -24,7 +24,7 @@ sys_api = Api(
             doc='/system/',
             title='System RESTful Service',
             description='System API',
-            default_swagger_filename= 'system',
+            # default_swagger_filename= 'system',
             prefix='/system'
         )
 

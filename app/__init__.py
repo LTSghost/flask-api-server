@@ -1,9 +1,9 @@
 import config as _config
-import sqlalchemy as db
+import sqlalchemy
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-
+# from app.models.system import sys_user
 
 print('app')
 
@@ -29,17 +29,19 @@ class TopBar(Resource):
 app.config['SQLALCHEMY_DATABASE_URI']=f'mysql+pymysql://{_config.username}:{_config.password}@{_config.host}:{_config.port}/{_config.database}'
 
 # build engine from sqlalchemy
-engine = db.create_engine(
+engine = sqlalchemy.create_engine(
     f'mysql+pymysql://{_config.username}:{_config.password}@{_config.host}:{_config.port}/{_config.database}')
 
 db = SQLAlchemy(app)
 
 # Define a model for demonstration
-class sys_user(db.Model):
-    __tablename__   = 'sys_user'
-    USER_ID = db.Column(db.String(50), primary_key=True)
-    USER_NAME = db.Column(db.String(50), unique=True)
-    PASSWORD = db.Column(db.String(100))
+# class sys_user(db.Model):
+#     __tablename__   = 'sys_user'
+#     USER_ID = db.Column(db.String(50), primary_key=True)
+#     USER_NAME = db.Column(db.String(50), unique=True)
+#     PASSWORD = db.Column(db.String(100))
+
+from app.models.system import sys_user
 
 # Execute raw SQL query
 def get_users():
