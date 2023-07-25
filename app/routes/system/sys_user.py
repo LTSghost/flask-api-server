@@ -40,10 +40,6 @@ class getSysUser(Resource):
 @ns_user.doc(params={'id': 'USER_ID'})
 class getSysUserById(Resource):
     def get(self, id):
+        print('by Id')
         return sysUserService.getSysUserById(id)
-    
-@ns_user.route('/add')
-class addSysUser(Resource):
-    @ns_user.expect(course_model)
-    def post(self):
-        return sysUserService.addSysUser()
+

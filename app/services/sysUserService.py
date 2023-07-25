@@ -33,7 +33,7 @@ class sysUserService():
         return json.loads(df_json)
     
     def getSysUserById(id):
-        getUser = db.get_or_404(sys_user, id)
+        getUser = db.get_or_404(sys_user, id, description="ID not found")
         print(getUser.USER_ID)
         print(getUser.PASSWORD)
         print(getUser.CREATE_TIME)
@@ -86,12 +86,25 @@ class sysUserService():
 
     def modifySysUser(data):
         current = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+
         try:
             # user = sys_user.query.filter_by(USER_ID=data['USER_ID']).one()
             user = sys_user.query.filter_by(USER_ID=data['USER_ID']).first_or_404(description=f"There is no data with {data['USER_ID']}")
-            user.USER_NAME="been change"
+            
+            beforeMd5 = data['USER_ID']+data['PASSWORD']
+
+            m = hashlib.md5()
+            m.update(beforeMd5.encode("utf-8"))
+            getHashData = m.hexdigest()
+
+            user.USER_NAME=data['USER_NAME']
+            user.PASSWORD=getHashData
+            user.IS_VALID=data['IS_VALID']
+            user.CREATOR=data['CREATOR']
             user.UPDATE_TIME=current
+
             db.session.commit()
+
             return {"message": "update successed"}
         except Exception as e:
             print(e)
