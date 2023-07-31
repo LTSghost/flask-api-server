@@ -2,6 +2,7 @@ import json
 import pandas as pd
 from app import engine
 from sqlalchemy import text
+from app.models.system import build_sys_menu_final_tree
 
 class sysMenuService:
     def getSysMenu():
@@ -15,6 +16,8 @@ class sysMenuService:
     
     def menuInfo(data):
         connection = engine.connect()
+
+        print(data['MENU_ID'])
 
         df = pd.read_sql(text(f"""
         select
@@ -36,8 +39,59 @@ class sysMenuService:
 
         df_json = df.to_json(orient='records')
 
+        print('aab')
+        print(json.loads(df_json))
+        print(df)
 
+        menu = set()
+        for el in json.loads(df_json):
+            
+            menu.add(el['MENU_ID'])
+            
+            if el['P_MENU_ID_B'] in menu:
+                el['children'] = {el['MENU_ID_B']}
+
+        def transfer_keys(data):
+            new_data = {}
+            for key, value in data.items():
+                if key.endswith("_B"):
+                    new_key = key.replace("_B", "")
+                    new_data.setdefault("children", {})[new_key] = value
+                else:
+                    new_data[key] = value
+            return new_data
+
+        # result = transfer_keys(json.loads(df_json)) 
+        # print(result)
+        
+        recordList = []
+        newList = []
+        for el in json.loads(df_json):
+
+            if el["MENU_ID"] not in recordList:
+                recordList.append(el["MENU_ID"])
+
+                newList.append(transfer_keys(el))
+            else:
+                getIndex = recordList.index(el["MENU_ID"])
+                newList[getIndex]['children']
+
+            
+        
+        return newList
+            
+        
+            
 
         connection.close()
+
+        resDict = {}
+        resDict['MENU_ID']=''
+
+        # result = build_sys_menu_final_tree(json.loads(df_json))
+        # return result
+
+        # for k,v in json.loads(df_json)[0].items():
+        #     print(k)
 
         return json.loads(df_json)
