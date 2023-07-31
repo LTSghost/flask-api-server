@@ -32,7 +32,9 @@ ns_user = Namespace('sys_user',description = 'sys_user operations', ordered=True
 sys_api.add_namespace(ns_user)
 
 # ns_user = sys_api.namespace('sys_user', description = 'sys_user operations')
-nr = sys_api.namespace('sys_role', description='sys operations')
+
+ns_role = sys_api.namespace('sys_role', description='sys operations')
+ns_menu = sys_api.namespace('sys_menu', description='sys operations')
 
 print('My_system done')
 

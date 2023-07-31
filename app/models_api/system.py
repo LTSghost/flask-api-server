@@ -1,15 +1,16 @@
 import json
 from app.routes.system import sys_api, fields
 
-add_model = sys_api.model("add_model", {
+
+# user
+addUser_model = sys_api.model("addUser_model", {
     "USER_ID": fields.String,
     "USER_NAME": fields.String,
     "PASSWORD": fields.String,
     "IS_VALID":fields.String,
     "CREATOR":fields.String
 })
-
-course_model = sys_api.model("course", {
+login_model = sys_api.model("login_model", {
     "USER_ID": fields.String,
     "PASSWORD": fields.String
 })
@@ -18,7 +19,7 @@ json_object = json.dumps({
     "name": "sunil",
     "department": "HR"
 })
-res_validate = sys_api.model("validate", {
+res_validate = sys_api.model("res_validate", {
     "MessageId": fields.String,
     "Message": fields.String,
     "Status": fields.String,
@@ -32,4 +33,10 @@ res_validate = sys_api.model("validate", {
         "UPDATER": "string",
         "UPDATE_TIME": "string"
     }))
+})
+
+# menu
+menu_model = sys_api.model("menu_model", {
+    "USER_ID": fields.String,
+    "USER_NAME": fields.String
 })

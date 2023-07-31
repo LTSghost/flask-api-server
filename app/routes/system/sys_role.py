@@ -5,12 +5,12 @@ from flask_restx import Resource
 
 # from .system import sys_role
 # from .__init__ import sys_api
-from . import nr
+from . import ns_role
 
 
 sys = 'sysRole'
 
-@nr.route('/role')
+@ns_role.route('/role')
 class getRole(Resource):
     def get(self):
         return {'message': 'testRole'}

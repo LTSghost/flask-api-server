@@ -19,7 +19,7 @@ class sysUserService():
         connection = engine.connect()
 
         df = pd.read_sql(text("select * from sys_user"), connection)
-
+        
         # Convert a specific column to string
         df['CREATE_TIME'] = df['CREATE_TIME'].astype(str)
         df['UPDATE_TIME'] = df['UPDATE_TIME'].astype(str)
